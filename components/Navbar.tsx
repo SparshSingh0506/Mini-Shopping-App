@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-export const Navbar = ({ handleSearch }) => {
+type Props = {
+    handleSearch: (e: React.SubmitEvent<HTMLFormElement>) => void;
+};
+
+export const Navbar = ({ handleSearch }: Props) => {
     return (
-        <nav className="bg-gray-700 fixed w-full z-20 top-0 inset-s-0 border-b border-default">
-            <div className="max-w-screen-7xl flex flex-wrap items-center justify-between mx-auto p-2 px-5">
+        <nav className="bg-gray-900 fixed w-full z-20 top-0 inset-s-0 border-b border-default">
+            <div className="max-w-screen-7xl flex flex-wrap items-center justify-between mx-auto p-0.5 px-5">
 
                 {/*Brand Logo*/}
-                <Link to="/" className="flex items-center space-x-3">
+                <NavLink to="/" className="flex items-center space-x-3">
                     <img
                         src="../src/assets/react.svg"
                         className="h-7"
@@ -14,29 +18,43 @@ export const Navbar = ({ handleSearch }) => {
                     />
 
                     <span className="text-xl text-white font-semibold">Mini e-Shop</span>
-                </Link>
+                </NavLink>
 
                 {/* Search */}
                 <div>
-                    <form onSubmit={handleSearch} className="flex items-center gap-2">
+                    <form onSubmit={handleSearch} className="flex items-center gap-1">
                         <input
                             type="text"
-                            placeholder="Search"
-                            className="hidden md:block px-3 py-2 rounded bg-gray-400 text-black"
+                            placeholder="Search items..."
+                            className="hidden md:block px-3 py-2 w-220 rounded bg-gray-100 text-black"
                         />
 
-                        <button className="p-2 text-white">
+                        <button className="cursor-pointer p-2 text-white">
                             <img src="../src/assets/search.svg" alt="search" className="w-10 h-10" />
                         </button>
                     </form>
                 </div>
 
                 {/*     Menu */}
-                <ul className="hidden md:flex gap-6 text-white font-semibold text-2xl">
-                    <li><Link to='/'>Home</Link></li>
-                    <li><Link to='/store'>Store</Link></li>
-                </ul>
+                <ul className="hidden md:flex gap-6 text-white font-semibold text-2xl hover:scale-105">
+                    <li>
+                        <NavLink to='/cart' className="flex items-center space-x-3">
+                            <span className="text-xl text-white font-semibold">Cart</span>
+                            <div className="relative">
+                                <img 
+                                    src="../src/assets/shopping-cart.svg" 
+                                    alt="cart" 
+                                    className="w-10 h-10" 
+                                />
 
+                                {/* Badge */}
+                                <span className="absolute -bottom-2 -right-2 bg-red-600 text-white text-xs font-semibold w-6 h-6 flex items-center justify-center rounded-full">
+                                    3
+                                </span>
+                            </div>
+                        </NavLink>
+                    </li>
+                </ul>
             </div>
         </nav>
     );
