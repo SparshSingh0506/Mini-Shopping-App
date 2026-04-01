@@ -6,7 +6,7 @@ type Props = {
 
 export const Navbar = ({ handleSearch }: Props) => {
     return (
-        <nav className="bg-gray-900 fixed w-full z-20 top-0 inset-s-0 border-b border-default">
+        <nav className="bg-gray-900  w-full z-20 top-0 inset-s-0 border-b border-default">
             <div className="max-w-screen-7xl flex flex-wrap items-center justify-between mx-auto p-0.5 px-5">
 
                 {/*Brand Logo*/}
