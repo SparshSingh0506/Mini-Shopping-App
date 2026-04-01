@@ -23,13 +23,13 @@ export interface Product {
   thumbnail: string
 }
 
-export interface Dimensions {
+interface Dimensions {
   width: number
   height: number
   depth: number
 }
 
-export interface Review {
+interface Review {
   rating: number
   comment: string
   date: string
@@ -37,7 +37,7 @@ export interface Review {
   reviewerEmail: string
 }
 
-export interface Meta {
+interface Meta {
   createdAt: string
   updatedAt: string
   barcode: string

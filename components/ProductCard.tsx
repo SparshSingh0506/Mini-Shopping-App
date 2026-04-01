@@ -1,10 +1,10 @@
-import { Product } from '../interfaces/Product'
+import type { Product } from '../interfaces/Product'
 
 interface productCardProps {
   product: Product
 }
 
-export const ProductCard = () => {
+export const ProductCard = ({ product }: productCardProps) => {
   return (
     <div className="bg-white rounded-xl shadow-md p-5 w-90 min-h-130 flex flex-col hover:shadow-lg transition">
 
@@ -20,8 +20,6 @@ export const ProductCard = () => {
         <span className="absolute top-0.5 left-0.5 bg-green-600 text-white text-xs px-2 py-1 rounded shadow opacity-85">
           20% OFF
         </span>
-
-        
       </div>
 
       {/* Divider */}
@@ -46,9 +44,8 @@ export const ProductCard = () => {
       {/* Price */}
       <div className="flex items-center gap-2 mt-1">
         <div className="flex flex-col">
-
-        <span className="text-2xl font-bold">$99.99</span>
-        <span className="text-xs text-green-600">In Stock</span>
+          <span className="text-2xl font-bold">$99.99</span>
+          <span className="text-xs text-green-600">In Stock</span>
         </div>
 
         <div className="flex ml-auto gap-1">

@@ -6,6 +6,7 @@ import { Cart } from "../pages/Cart"
 
 import { Navbar } from "../components/Navbar"
 
+
 function App() {
   const handlSearch = (): void => {
     
