@@ -49,7 +49,7 @@ export const Navbar = ({ handleSearch }: Props) => {
 
                                 {/* Badge */}
                                 <span className="absolute -bottom-2 -right-2 bg-red-600 text-white text-xs font-semibold w-6 h-6 flex items-center justify-center rounded-full">
-                                    3
+                                    {3}
                                 </span>
                             </div>
                         </NavLink>

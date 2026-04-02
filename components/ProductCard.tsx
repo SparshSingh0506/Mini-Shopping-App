@@ -20,7 +20,7 @@ export const ProductCard = ({ product }: productCardProps) => {
 
         {product.discountPercentage > 5 ?
           <span className="absolute top-0.5 left-0.5 bg-green-600 text-white text-xs px-2 py-1 rounded shadow opacity-85">
-            {`${Math.round(product.discountPercentage)} % Off`}
+            {`${Math.round(product.discountPercentage)}% Off!`}
           </span>
           : ""
         }
@@ -54,7 +54,7 @@ export const ProductCard = ({ product }: productCardProps) => {
 
         {/* Rating & total reviews */}
         <div className="flex ml-auto gap-1">
-          <span className=" text-black text-m font-semibold">{`⭐⭐⭐⭐⭐ ${product.rating}`}</span>
+          <span className=" text-black text-m font-semibold">{`⭐⭐⭐⭐⭐ ${product.rating.toFixed(1)}`}</span>
           <span className="text-gray-600 text-m">{`(${product.reviews.length})`}</span>
         </div>
       </div>

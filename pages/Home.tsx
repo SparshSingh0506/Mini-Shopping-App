@@ -26,11 +26,11 @@ export const Home = () => {
         fetchProdcuts();
     }, []);
 
-    if (loading) return <h2 className="text-center mt-10">Loading...</h2>;
-    if (error) return <h2 className="text-center mt-10">{error}</h2>;
+    if (loading) return <h1 className="flex h-screen justify-center text-4xl mt-100">Loading...</h1>;
+    if (error) return <h2 className="flex h-screen justify-center text-4xl mt-100">{error}</h2>;
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-4">
+        <div className="grid gap-6 p-4 grid-cols-[repeat(auto-fit,minmax(350px,1fr))]">
             {products.map(product => <ProductCard product={product} key={product.id}/>)}
         </div>
     )
