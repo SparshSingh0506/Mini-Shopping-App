@@ -11,7 +11,6 @@ export const Home = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        
         const fetchProdcuts = async () => {
             try {
                 const fetchedProducts: Product[] = await getProducts();
@@ -27,9 +26,12 @@ export const Home = () => {
         fetchProdcuts();
     }, []);
 
+    if (loading) return <h2 className="text-center mt-10">Loading...</h2>;
+    if (error) return <h2 className="text-center mt-10">{error}</h2>;
+
     return (
-        <div className="">
-            {products.map(product => <ProductCard product={product} />)}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-4">
+            {products.map(product => <ProductCard product={product} key={product.id}/>)}
         </div>
     )
 }
