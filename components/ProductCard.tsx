@@ -2,7 +2,7 @@ import type { Product } from '../interfaces/Product'
 
 interface productCardProps {
   product: Product
-}
+} 
 
 export const ProductCard = ({ product }: productCardProps) => {
   return (
@@ -22,7 +22,7 @@ export const ProductCard = ({ product }: productCardProps) => {
           <span className="absolute top-0.5 left-0.5 bg-green-600 text-white text-xs px-2 py-1 rounded shadow opacity-85">
             {`${Math.round(product.discountPercentage)}% Off!`}
           </span>
-          : ""
+          : null
         }
 
       </div>

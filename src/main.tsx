@@ -6,11 +6,14 @@ import { BrowserRouter } from 'react-router-dom'
 import './assets/index.css'
 
 import App from './App.tsx'
+import { CartContextProvider } from '../contexts/CartContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <CartContextProvider>
+        <App />
+      </CartContextProvider>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )

@@ -6,10 +6,10 @@ import { Cart } from "../pages/Cart"
 
 import { Navbar } from "../components/Navbar"
 
-
 function App() {
+
   const handlSearch = (): void => {
-    
+    return;
   }
 
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path='/store' element={<Store />} />
           <Route path='/cart' element={<Cart />} />
         </Routes>
-    </div>
+      </div>
     </div>
   )
 }
