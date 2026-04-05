@@ -39,9 +39,14 @@ export const CartContextProvider = ({ children }: { children: React.ReactNode })
 
     const removeFromCart = (productID: number) => {
         setItems(currentItems =>
-            currentItems.map(item =>
-                item.id === productID ? { ...item, quantity: item.quantity - 1 } : item
-            ).filter(item => item.quantity > 0)
+            currentItems
+                .map(item =>
+                    item.id === productID
+                        ? { ...item, quantity: item.quantity - 1 }
+                        : item
+                )
+                .filter(item => 
+                    item.quantity > 0)
         )
     }
 
