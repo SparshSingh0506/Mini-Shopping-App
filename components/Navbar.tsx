@@ -1,10 +1,13 @@
 import { NavLink } from "react-router-dom";
 
+import { useCartContext } from '../contexts/CartContext'
+
 type Props = {
     handleSearch: (e: React.SubmitEvent<HTMLFormElement>) => void;
 };
 
 export const Navbar = ({ handleSearch }: Props) => {
+        const { items } = useCartContext();
     return (
         <nav className="bg-gray-900  w-full z-20 top-0 inset-s-0 border-b border-default">
             <div className="max-w-screen-7xl flex flex-wrap items-center justify-between mx-auto p-0.5 px-5">
@@ -49,7 +52,7 @@ export const Navbar = ({ handleSearch }: Props) => {
 
                                 {/* Badge */}
                                 <span className="absolute -bottom-2 -right-2 bg-red-600 text-white text-xs font-semibold w-6 h-6 flex items-center justify-center rounded-full">
-                                    {3}
+                                    {items.length}
                                 </span>
                             </div>
                         </NavLink>

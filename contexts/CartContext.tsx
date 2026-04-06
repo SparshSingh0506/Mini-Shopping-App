@@ -10,6 +10,7 @@ interface CartContextType { // this is the data context provider will be globall
     items: CartItem[]
     addToCart: (product: Product) => void
     removeFromCart: (productID: number) => void
+    clearItemFromCart: (productID: number) => void
     clearCart: () => void
 }
 
@@ -50,9 +51,13 @@ export const CartContextProvider = ({ children }: { children: React.ReactNode })
                         ? { ...item, quantity: item.quantity - 1 }
                         : item
                 )
-                .filter(item => 
+                .filter(item =>
                     item.quantity > 0)
         );
+    }
+
+    const clearItemFromCart = (productID: number) => {
+        
     }
 
     const clearCart = () => {
@@ -60,7 +65,7 @@ export const CartContextProvider = ({ children }: { children: React.ReactNode })
     }
 
     return (
-        <cartContext.Provider value={{ items, addToCart, removeFromCart, clearCart }}>
+        <cartContext.Provider value={{ items, addToCart, removeFromCart, clearItemFromCart, clearCart }}>
             {children}
         </cartContext.Provider>
     );
