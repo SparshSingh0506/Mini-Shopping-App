@@ -1,10 +1,16 @@
 import type { Product } from '../interfaces/Product'
 
+import { useCartContext } from '../contexts/CartContext'
+
+const MIN_DISCOUNT_FOR_RENDER = 5;
+
 interface productCardProps {
   product: Product
-} 
+}
 
 export const ProductCard = ({ product }: productCardProps) => {
+  const { addToCart } = useCartContext();
+
   return (
     <div className="bg-white rounded-xl shadow-md p-5 w-90 min-h-130 flex flex-col transition-all duration-300 ease-out hover:cursor-pointer hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02]">
 
@@ -18,7 +24,7 @@ export const ProductCard = ({ product }: productCardProps) => {
 
         {/* Discount Overlay */}
 
-        {product.discountPercentage > 5 ?
+        {product.discountPercentage > MIN_DISCOUNT_FOR_RENDER ?
           <span className="absolute top-0.5 left-0.5 bg-green-600 text-white text-xs px-2 py-1 rounded shadow opacity-85">
             {`${Math.round(product.discountPercentage)}% Off!`}
           </span>
@@ -61,7 +67,7 @@ export const ProductCard = ({ product }: productCardProps) => {
 
       {/* Button at bottom */}
       <div className="mt-auto">
-        <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 hover:cursor-pointer">
+        <button onClick={() => addToCart(product)} className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 hover:cursor-pointer">
           Add to Cart
         </button>
       </div>
