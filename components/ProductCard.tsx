@@ -15,7 +15,7 @@ export const ProductCard = ({ product }: productCardProps) => {
   return (
     <div className="bg-white rounded-xl shadow-md p-5 w-90 min-h-130
       flex flex-col transition-all duration-300 ease-out 
-      hover:cursor-pointer hover:shadow-xl hover:-translate-y-2 hover:scale-[1.01]"
+      hover:cursor-pointer hover:shadow-xl hover:-translate-y-1.5 hover:scale-[1.005]"
     >
 
       {/* Image Section */}
@@ -81,12 +81,14 @@ export const ProductCard = ({ product }: productCardProps) => {
             ?
             <button
               onClick={() => addToCart(product)}
-              className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 hover:cursor-pointer"
+              className="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg 
+              transition-all duration-200 hover:bg-blue-700 hover:scale-103 hover:cursor-pointer"
             >
               Add to Cart
             </button>
             :
             <div className="flex gap-3 w-fit items-center">
+
               {/* Quantity Box */}
               <div className="flex items-center border-2 border-gray-800 rounded-lg overflow-hidden bg-gray-50">
 
@@ -94,14 +96,14 @@ export const ProductCard = ({ product }: productCardProps) => {
                 <button
                   onClick={() => removeFromCart(product.id)}
                   className="px-3 py-1 text-lg font-bold 
-                 bg-red-200 hover:bg-red-400 
+                 bg-gray-200 hover:bg-red-300 
                   active:scale-95 active:rounded-sm transition"
                 >
                   -
                 </button>
 
                 {/* Quantity */}
-                <span className="px-4 py-1 border-x bg-yellow-100 font-medium">
+                <span className="px-4 py-1 border-x bg-white font-medium">
                   {itemInCart.quantity}
                 </span>
 
@@ -109,7 +111,7 @@ export const ProductCard = ({ product }: productCardProps) => {
                 <button
                   onClick={() => addToCart(product)}
                   className="px-3 py-1 text-lg font-bold 
-                 bg-green-200 hover:bg-green-400 
+                 bg-gray-200 hover:bg-green-300 
                   active:scale-95 active:rounded-sm transition"
                 >
                   +
@@ -123,10 +125,11 @@ export const ProductCard = ({ product }: productCardProps) => {
                 className="px-4 py-2 rounded-lg 
                bg-red-500 text-white font-medium 
                 transition-all duration-200 
-               hover:bg-red-600 active:scale-95"
+               hover:bg-red-600 hover:scale-105 active:scale-95"
               >
                 Remove
               </button>
+              
             </div>
         }
       </div>
