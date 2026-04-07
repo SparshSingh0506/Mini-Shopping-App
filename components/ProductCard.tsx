@@ -13,34 +13,29 @@ const formattedPriceDisplay = (amount: number) => {
     style: 'currency',
     currency: 'USD',
   })
-  .format(amount);
+    .format(amount);
 
   return formattedPrice;
 }
 
 export const ProductCard = ({ product }: productCardProps) => {
+  const { id, title, description, price, discountPercentage, rating, stock, reviews, thumbnail } = product;
+
   const { items, addToCart, removeFromCart } = useCartContext();
-  const itemInCart = items.find(item => product.id === item.id);
+  const itemInCart = items.find(item => id === item.id);
 
-  const calculateDiscount = () => {
-    const price = product.price;
-    const discount = product.discountPercentage;
-
-    return price - (price * discount / 100);
-  }
-
-  const finalPrice = calculateDiscount();
+  const finalPrice = price - (price * discountPercentage / 100);
 
   return (
     <div className="bg-white rounded-xl shadow-md p-5 w-90 min-h-130
       flex flex-col transition-all duration-300 ease-out 
-      hover:cursor-pointer hover:shadow-xl hover:-translate-y-1.5 hover:scale-[1.005]"
+      hover:cursor-pointer hover:shadow-xl hover:scale-[1.01]"
     >
 
       {/* Image Section */}
       <div className="relative">
         <img
-          src={product.images[0]}
+          src={thumbnail}
           alt="product"
           className="w-full h-55 object-contain"
         />
@@ -48,12 +43,12 @@ export const ProductCard = ({ product }: productCardProps) => {
         {/* Discount Overlay */}
 
         {
-          product.discountPercentage > MIN_DISCOUNT_FOR_RENDER
+          discountPercentage > MIN_DISCOUNT_FOR_RENDER
             ?
             <span className="absolute top-0.5 left-0.5 bg-green-600 
           text-white text-xs px-2 py-1 rounded shadow opacity-85"
             >
-              {`${Math.round(product.discountPercentage)}% Off!`}
+              {`${Math.round(discountPercentage)}% Off!`}
             </span>
             :
             null
@@ -69,12 +64,12 @@ export const ProductCard = ({ product }: productCardProps) => {
 
         {/* Title */}
         <h2 className="text-2xl font-bold line-clamp-2">
-          {product.title}
+          {title}
         </h2>
 
         {/* Description */}
         <p className="text-sm text-gray-600 mt-2 line-clamp-3">
-          {product.description}
+          {description}
         </p>
 
       </div>
@@ -85,13 +80,13 @@ export const ProductCard = ({ product }: productCardProps) => {
         <div className="flex flex-col">
 
           {
-            (Math.round(product.discountPercentage) > MIN_DISCOUNT_FOR_RENDER)
+            (Math.round(discountPercentage) > MIN_DISCOUNT_FOR_RENDER)
               ?
               <div className="flex flex-1 gap-2 items-baseline">
 
                 <span className="text-gray-600 font-semibold line-through">
-                  {formattedPriceDisplay(product.price)}
-                </span> 
+                  {formattedPriceDisplay(price)}
+                </span>
 
                 <span className="text-2xl font-bold">
                   {formattedPriceDisplay(finalPrice)}
@@ -99,13 +94,13 @@ export const ProductCard = ({ product }: productCardProps) => {
 
               </div>
               :
-              <span className="text-2xl font-bold">{formattedPriceDisplay(product.price)}</span>
+              <span className="text-2xl font-bold">{formattedPriceDisplay(price)}</span>
           }
 
           {
-            (product.stock > 0)
+            (stock > 0)
               ?
-              <span className="text-xs text-green-600">{`In Stock (${product.stock})`}</span>
+              <span className="text-xs text-green-600">{`In Stock (${stock})`}</span>
               :
               <span className="text-xs text-red-600">Out of Stock</span>
           }
@@ -114,8 +109,8 @@ export const ProductCard = ({ product }: productCardProps) => {
 
         {/* Rating & total reviews */}
         <div className="flex ml-auto gap-1">
-          <span className=" text-black text-m font-semibold">{`⭐ ${product.rating.toFixed(1)}`}</span>
-          <span className="text-gray-600 text-m">{`(${product.reviews.length})`}</span>
+          <span className=" text-black text-m font-semibold">{`⭐ ${rating.toFixed(1)}`}</span>
+          <span className="text-gray-600 text-m">{`(${reviews.length})`}</span>
         </div>
 
       </div>
@@ -141,7 +136,7 @@ export const ProductCard = ({ product }: productCardProps) => {
 
                 {/* Minus */}
                 <button
-                  onClick={() => removeFromCart(product.id)}
+                  onClick={() => removeFromCart(id)}
                   className="px-3 py-1 text-lg font-bold 
                  bg-gray-200 hover:bg-red-300 
                   active:scale-95 active:rounded-sm transition"
@@ -168,7 +163,7 @@ export const ProductCard = ({ product }: productCardProps) => {
 
               {/* Remove Button */}
               <button
-                onClick={() => removeFromCart(product.id)}
+                onClick={() => removeFromCart(id)}
                 className="px-4 py-2 rounded-lg 
                bg-red-500 text-white font-medium 
                 transition-all duration-200 

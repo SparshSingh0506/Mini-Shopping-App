@@ -7,10 +7,12 @@ type Props = {
 };
 
 export const Navbar = ({ handleSearch }: Props) => {
-        const { items } = useCartContext();
+    const { items } = useCartContext();
+
     return (
         <nav className="bg-gray-900  w-full z-20 top-0 inset-s-0 border-b border-default">
-            <div className="max-w-screen-7xl flex flex-wrap items-center justify-between mx-auto p-0.5 px-5">
+            <div className="max-w-screen-7xl flex flex-wrap items-center 
+            justify-between mx-auto p-0.5 px-5">
 
                 {/*Brand Logo*/}
                 <NavLink to="/" className="flex items-center space-x-3">
@@ -38,20 +40,22 @@ export const Navbar = ({ handleSearch }: Props) => {
                     </form>
                 </div>
 
-                {/*     Menu */}
+                {/*Menu */}
                 <ul className="hidden md:flex gap-6 text-white font-semibold text-2xl hover:scale-105">
                     <li>
                         <NavLink to='/cart' className="flex items-center space-x-3">
                             <span className="text-xl text-white font-semibold">Cart</span>
+
                             <div className="relative">
-                                <img 
-                                    src="../src/assets/shopping-cart.svg" 
-                                    alt="cart" 
-                                    className="w-10 h-10" 
+                                <img
+                                    src="../src/assets/shopping-cart.svg"
+                                    alt="cart"
+                                    className="w-10 h-10"
                                 />
 
                                 {/* Badge */}
-                                <span className="absolute -bottom-2 -right-2 bg-red-600 text-white text-xs font-semibold w-6 h-6 flex items-center justify-center rounded-full">
+                                <span className="absolute -bottom-2 -right-2 bg-red-600 text-white text-xs 
+                                font-semibold w-6 h-6 flex items-center justify-center rounded-full">
                                     {items.length}
                                 </span>
                             </div>
