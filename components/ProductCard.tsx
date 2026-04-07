@@ -8,9 +8,28 @@ interface productCardProps {
   product: Product
 }
 
+const formattedPriceDisplay = (amount: number) => {
+  const formattedPrice = new Intl.NumberFormat('en-US', { // standard practice for currency - auto punctuationl, symbol and round for amount
+    style: 'currency',
+    currency: 'USD',
+  })
+  .format(amount);
+
+  return formattedPrice;
+}
+
 export const ProductCard = ({ product }: productCardProps) => {
   const { items, addToCart, removeFromCart } = useCartContext();
   const itemInCart = items.find(item => product.id === item.id);
+
+  const calculateDiscount = () => {
+    const price = product.price;
+    const discount = product.discountPercentage;
+
+    return price - (price * discount / 100);
+  }
+
+  const finalPrice = calculateDiscount();
 
   return (
     <div className="bg-white rounded-xl shadow-md p-5 w-90 min-h-130
@@ -61,17 +80,44 @@ export const ProductCard = ({ product }: productCardProps) => {
       </div>
 
       <div className="flex items-center gap-2 mt-1">
+
         {/* Price */}
         <div className="flex flex-col">
-          <span className="text-2xl font-bold">{`$${product.price}`}</span>
-          {product.stock > 0 ? <span className="text-xs text-green-600">{`In Stock (${product.stock})`}</span> : <span className="text-xs text-red-600">Out of Stock</span>}
+
+          {
+            (Math.round(product.discountPercentage) > MIN_DISCOUNT_FOR_RENDER)
+              ?
+              <div className="flex flex-1 gap-2 items-baseline">
+
+                <span className="text-gray-600 font-semibold line-through">
+                  {formattedPriceDisplay(product.price)}
+                </span> 
+
+                <span className="text-2xl font-bold">
+                  {formattedPriceDisplay(finalPrice)}
+                </span>
+
+              </div>
+              :
+              <span className="text-2xl font-bold">{formattedPriceDisplay(product.price)}</span>
+          }
+
+          {
+            (product.stock > 0)
+              ?
+              <span className="text-xs text-green-600">{`In Stock (${product.stock})`}</span>
+              :
+              <span className="text-xs text-red-600">Out of Stock</span>
+          }
+
         </div>
 
         {/* Rating & total reviews */}
         <div className="flex ml-auto gap-1">
-          <span className=" text-black text-m font-semibold">{`⭐⭐⭐⭐⭐ ${product.rating.toFixed(1)}`}</span>
+          <span className=" text-black text-m font-semibold">{`⭐ ${product.rating.toFixed(1)}`}</span>
           <span className="text-gray-600 text-m">{`(${product.reviews.length})`}</span>
         </div>
+
       </div>
 
       {/* Cart Handling */}
@@ -90,7 +136,8 @@ export const ProductCard = ({ product }: productCardProps) => {
             <div className="flex gap-3 w-fit items-center">
 
               {/* Quantity Box */}
-              <div className="flex items-center border-2 border-gray-800 rounded-lg overflow-hidden bg-gray-50">
+              <div className="flex items-center border-2 border-gray-800 
+              rounded-lg overflow-hidden bg-gray-50">
 
                 {/* Minus */}
                 <button
@@ -129,7 +176,7 @@ export const ProductCard = ({ product }: productCardProps) => {
               >
                 Remove
               </button>
-              
+
             </div>
         }
       </div>
