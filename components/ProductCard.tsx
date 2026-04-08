@@ -21,7 +21,7 @@ const formattedPriceDisplay = (amount: number) => {
 export const ProductCard = ({ product }: productCardProps) => {
   const { id, title, description, price, discountPercentage, rating, stock, reviews, thumbnail } = product;
 
-  const { items, addToCart, removeFromCart } = useCartContext();
+  const { items, addToCart, removeFromCart, clearItemFromCart } = useCartContext();
   const itemInCart = items.find(item => id === item.id);
 
   const finalPrice = price - (price * discountPercentage / 100);
@@ -163,7 +163,7 @@ export const ProductCard = ({ product }: productCardProps) => {
 
               {/* Remove Button */}
               <button
-                onClick={() => removeFromCart(id)}
+                onClick={() => clearItemFromCart(id)}
                 className="px-4 py-2 rounded-lg 
                bg-red-500 text-white font-medium 
                 transition-all duration-200 

@@ -57,7 +57,10 @@ export const CartContextProvider = ({ children }: { children: React.ReactNode })
     }
 
     const clearItemFromCart = (productID: number) => {
-        
+        setItems(currentItems =>
+            currentItems
+                .filter(item => item.id !== productID)
+        );
     }
 
     const clearCart = () => {
