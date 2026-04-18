@@ -24,11 +24,7 @@ export const useCartContext = () => {
     return context;
 }
 
-/*
-interface CartContextProviderProps {
-    children : React.ReactNode
-} // Any component returns a tsx, which is a React Node
-*/
+// interface CartContextProviderProps { children : React.ReactNode } // Any component returns a tsx, which is a React Node
 
 export const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [items, setItems] = useState<CartItem[]>([]);

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { ProductCard } from '../components/ProductCard'
+import type { Product } from "../interfaces/Product"
+
 import { getProducts } from '../services/API'
 
-import type { Product } from "../interfaces/Product"
+import { HomeProductCard } from '../components/HomeProductCard'
 
 export const Home = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -31,7 +32,7 @@ export const Home = () => {
 
     return (
         <div className="grid gap-6 p-4 grid-cols-[repeat(auto-fit,minmax(350px,1fr))]">
-            {products.map(product => <ProductCard product={product} key={product.id}/>)}
+            {products.map(product => <HomeProductCard product={product} key={product.id}/>)}
         </div>
     )
 }

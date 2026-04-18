@@ -13,7 +13,7 @@ function App() {
   }
 
   return (
-    <div className='flex flex-col min-h-screen bg-gray-200 text-black'>
+    <div className='min-h-screen bg-gray-200 text-black'>
       <Navbar handleSearch={handlSearch} />
 
       <div className='flex-1 p-4'>

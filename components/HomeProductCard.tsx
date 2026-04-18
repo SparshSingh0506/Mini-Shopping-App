@@ -1,24 +1,10 @@
 import type { Product } from '../interfaces/Product'
-
-import { useCartContext } from '../contexts/CartContext'
+import { useCartContext } from '../contexts/CartContext';
+import { formattedPriceDisplay } from '../utils/formatPrice'
 
 const MIN_DISCOUNT_FOR_RENDER = 5;
 
-interface productCardProps {
-  product: Product
-}
-
-const formattedPriceDisplay = (amount: number) => {
-  const formattedPrice = new Intl.NumberFormat('en-US', { // standard practice for currency - auto punctuationl, symbol and round for amount
-    style: 'currency',
-    currency: 'USD',
-  })
-    .format(amount);
-
-  return formattedPrice;
-}
-
-export const ProductCard = ({ product }: productCardProps) => {
+export const HomeProductCard = ({ product }: { product: Product }) => {
   const { id, title, description, price, discountPercentage, rating, stock, reviews, thumbnail } = product;
 
   const { items, addToCart, removeFromCart, clearItemFromCart } = useCartContext();
@@ -138,7 +124,7 @@ export const ProductCard = ({ product }: productCardProps) => {
                 <button
                   onClick={() => removeFromCart(id)}
                   className="px-3 py-1 text-lg font-bold 
-                 bg-gray-200 hover:bg-red-300 
+                 bg-gray-200 hover:bg-red-300 hover:cursor-pointer
                   active:scale-95 active:rounded-sm transition"
                 >
                   -
@@ -153,7 +139,7 @@ export const ProductCard = ({ product }: productCardProps) => {
                 <button
                   onClick={() => addToCart(product)}
                   className="px-3 py-1 text-lg font-bold 
-                 bg-gray-200 hover:bg-green-300 
+                 bg-gray-200 hover:bg-green-300 hover:cursor-pointer
                   active:scale-95 active:rounded-sm transition"
                 >
                   +
@@ -166,7 +152,7 @@ export const ProductCard = ({ product }: productCardProps) => {
                 onClick={() => clearItemFromCart(id)}
                 className="px-4 py-2 rounded-lg 
                bg-red-500 text-white font-medium 
-                transition-all duration-200 
+                transition-all duration-200 hover:cursor-pointer
                hover:bg-red-600 hover:scale-105 active:scale-95"
               >
                 Remove
