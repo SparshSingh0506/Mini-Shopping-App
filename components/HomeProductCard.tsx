@@ -2,12 +2,14 @@ import type { Product } from '../interfaces/Product'
 import { useCartContext } from '../contexts/CartContext';
 import { formattedPriceDisplay } from '../utils/formatPrice'
 
+import { QuantityBox } from './QuantityBox';
+
 const MIN_DISCOUNT_FOR_RENDER = 5;
 
 export const HomeProductCard = ({ product }: { product: Product }) => {
   const { id, title, description, price, discountPercentage, rating, stock, reviews, thumbnail } = product;
+  const { items, addToCart, clearItemFromCart } = useCartContext();
 
-  const { items, addToCart, removeFromCart, clearItemFromCart } = useCartContext();
   const itemInCart = items.find(item => id === item.id);
 
   const finalPrice = price - (price * discountPercentage / 100);
@@ -39,7 +41,6 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
             :
             null
         }
-
       </div>
 
       {/* Divider */}
@@ -60,9 +61,9 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
 
       </div>
 
+      {/* Price Stock Review*/}
       <div className="flex items-center gap-2 mt-1">
 
-        {/* Price */}
         <div className="flex flex-col">
 
           {
@@ -117,35 +118,7 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
             <div className="flex gap-3 w-fit items-center">
 
               {/* Quantity Box */}
-              <div className="flex items-center border-2 border-gray-800 
-              rounded-lg overflow-hidden bg-gray-50">
-
-                {/* Minus */}
-                <button
-                  onClick={() => removeFromCart(id)}
-                  className="px-3 py-1 text-lg font-bold 
-                 bg-gray-200 hover:bg-red-300 hover:cursor-pointer
-                  active:scale-95 active:rounded-sm transition"
-                >
-                  -
-                </button>
-
-                {/* Quantity */}
-                <span className="px-4 py-1 border-x bg-white font-medium">
-                  {itemInCart.quantity}
-                </span>
-
-                {/* Plus */}
-                <button
-                  onClick={() => addToCart(product)}
-                  className="px-3 py-1 text-lg font-bold 
-                 bg-gray-200 hover:bg-green-300 hover:cursor-pointer
-                  active:scale-95 active:rounded-sm transition"
-                >
-                  +
-                </button>
-
-              </div>
+              <QuantityBox product={product} itemInCart={itemInCart} />
 
               {/* Remove Button */}
               <button
