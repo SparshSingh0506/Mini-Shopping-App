@@ -1,6 +1,7 @@
 import type { Product } from '../interfaces/Product'
 import { useCartContext } from '../contexts/CartContext';
-import { formattedPriceDisplay } from '../utils/formatPrice'
+import { getFormattedPriceDisplay } from '../utils/formatPrice'
+//import { applyDiscountPriceIfEligible  } from '../utils/conditionalDiscount'
 
 import { QuantityBox } from './QuantityBox';
 
@@ -65,23 +66,22 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
       <div className="flex items-center gap-2 mt-1">
 
         <div className="flex flex-col">
-
           {
-            (Math.round(discountPercentage) > MIN_DISCOUNT_FOR_RENDER)
+            (discountPercentage > MIN_DISCOUNT_FOR_RENDER)
               ?
               <div className="flex flex-1 gap-2 items-baseline">
 
                 <span className="text-gray-600 font-semibold line-through">
-                  {formattedPriceDisplay(price)}
+                  {getFormattedPriceDisplay(price)}
                 </span>
 
                 <span className="text-2xl font-bold">
-                  {formattedPriceDisplay(finalPrice)}
+                  {getFormattedPriceDisplay(finalPrice)}
                 </span>
 
               </div>
               :
-              <span className="text-2xl font-bold">{formattedPriceDisplay(price)}</span>
+              <span className="text-2xl font-bold">{getFormattedPriceDisplay(price)}</span>
           }
 
           {

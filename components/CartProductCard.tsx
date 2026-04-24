@@ -1,10 +1,10 @@
-import { formattedPriceDisplay } from '../utils/formatPrice'
+import { getFormattedPriceDisplay } from '../utils/formatPrice'
 import type { CartItem } from '../contexts/CartContext';
 import { QuantityBox } from './QuantityBox';
 
 export const CartProductCard = ({ item }: { item: CartItem }) => {
 
-  const { thumbnail, title, stock, description, shippingInformation } = item;
+  const { thumbnail, title, stock, description, shippingInformation, price } = item;
 
   return (
     <div className="flex gap-6 border-b pb-4 mb-4 min-h-60">
@@ -24,28 +24,32 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
 
           {
             stock > 0
-              ? <p className="text-green-600 text-sm">
-                In Stock
-              </p>
+              ? <div className="flex gap-3 items-center">
+                <p className="text-green-600 text-sm">
+                  In Stock
+                </p>
+
+                <p>|</p>
+
+                <p className="text-gray-500 text-sm">
+                  {shippingInformation}
+                </p>
+              </div>
               :
               <p className="text-red-600 text-sm">
                 Out of Stock
               </p>
           }
 
-          <p className="text-black text-sm">
+          <p className="text-black text-m mt-1">
             {description}
-          </p>
-
-          <p className="text-gray-500 text-sm">
-            {shippingInformation}
           </p>
         </div>
 
         {/* ACTIONS */}
         <div className="flex items-center gap-4 mt-3">
-          <QuantityBox product={item} itemInCart={item}/>
-          
+          <QuantityBox product={item} itemInCart={item} />
+
           <button className="text-blue-600 text-sm hover:text-red-600 hover:underline hover:cursor-pointer">
             Delete
           </button>
@@ -58,7 +62,7 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
 
       {/* PRICE */}
       <div className="text-2xl font-semibold">
-        {formattedPriceDisplay(999)}
+        {getFormattedPriceDisplay(price)}
       </div>
     </div>
   );

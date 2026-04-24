@@ -27,7 +27,7 @@ export const Cart = () => {
             {/* LEFT - PRODUCTS */}
             <div className="flex-1 bg-white p-6 rounded-lg shadow-sm">
 
-              <h2 className="text-2xl font-semibold mb-4">
+              <h2 className="text-4xl font-semibold mb-4">
                 🛒 Shopping Cart
               </h2>
 
@@ -46,17 +46,17 @@ export const Cart = () => {
               </h2>
 
               <div className="flex justify-between mb-2 text-sm">
-                <span>Subtotal</span>
+                <span className="font-semibold">Subtotal</span>
                 <span>₹1998</span>
               </div>
 
               <div className="flex justify-between mb-2 text-sm">
-                <span>Shipping</span>
+                <span className="font-semibold">Shipping</span>
                 <span className="text-green-600">FREE</span>
               </div>
 
               <div className="flex justify-between mb-4 text-sm">
-                <span>Tax</span>
+                <span className="font-semibold">Tax</span>
                 <span>₹100</span>
               </div>
 
