@@ -4,7 +4,7 @@ import type { Product } from "../interfaces/Product"
 
 import { getProducts } from '../services/API'
 
-import { HomeProductCard } from '../components/HomeProductCard'
+import { HomeProductCard } from '../components/cards/HomeProductCard'
 
 export const Home = () => {
     const [products, setProducts] = useState<Product[]>([]);

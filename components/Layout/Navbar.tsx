@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import { useCartContext } from '../contexts/CartContext'
+import { useCartContext } from '../../contexts/CartContext'
 
 type Props = {
     handleSearch: (e: React.SubmitEvent<HTMLFormElement>) => void;

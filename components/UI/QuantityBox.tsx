@@ -1,6 +1,6 @@
-import { useCartContext } from '../contexts/CartContext';
-import type { CartItem } from '../contexts/CartContext';
-import type { Product } from '../interfaces/Product';
+import { useCartContext } from '../../contexts/CartContext';
+import type { CartItem } from '../../contexts/CartContext';
+import type { Product } from '../../interfaces/Product';
 
 export const QuantityBox = ({ product, itemInCart }: {product: Product, itemInCart: CartItem}) => {
   const { id } = product;

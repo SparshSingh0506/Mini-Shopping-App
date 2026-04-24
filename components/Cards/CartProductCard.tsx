@@ -1,6 +1,6 @@
-import { getFormattedPriceDisplay } from '../utils/formatPrice'
-import type { CartItem } from '../contexts/CartContext';
-import { QuantityBox } from './QuantityBox';
+import { getFormattedPriceDisplay } from '../../utils/formatPrice'
+import type { CartItem } from '../../contexts/CartContext';
+import { QuantityBox } from '../ui/QuantityBox';
 
 export const CartProductCard = ({ item }: { item: CartItem }) => {
 

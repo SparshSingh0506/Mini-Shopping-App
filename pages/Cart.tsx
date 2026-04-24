@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 import { useCartContext } from '../contexts/CartContext'
-import { CartProductCard } from '../components/CartProductCard'
+import { CartProductCard } from '../components/cards/CartProductCard'
 
 export const Cart = () => {
   const { items } = useCartContext();

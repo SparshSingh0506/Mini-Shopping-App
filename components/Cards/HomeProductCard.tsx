@@ -1,19 +1,16 @@
-import type { Product } from '../interfaces/Product'
-import { useCartContext } from '../contexts/CartContext';
-import { getFormattedPriceDisplay } from '../utils/formatPrice'
-//import { applyDiscountPriceIfEligible  } from '../utils/conditionalDiscount'
+import type { Product } from '../../interfaces/Product'
 
-import { QuantityBox } from './QuantityBox';
+import { useCartContext } from '../../contexts/CartContext';
 
-const MIN_DISCOUNT_FOR_RENDER = 5;
+import { QuantityBox } from '../ui/QuantityBox';
+import { MIN_DISCOUNT_FOR_RENDER, PriceDisplay } from '../ui/PriceDisplay';
+
 
 export const HomeProductCard = ({ product }: { product: Product }) => {
   const { id, title, description, price, discountPercentage, rating, stock, reviews, thumbnail } = product;
   const { items, addToCart, clearItemFromCart } = useCartContext();
 
   const itemInCart = items.find(item => id === item.id);
-
-  const finalPrice = price - (price * discountPercentage / 100);
 
   return (
     <div className="bg-white rounded-xl shadow-md p-5 w-90 min-h-130
@@ -32,15 +29,13 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
         {/* Discount Overlay */}
 
         {
-          discountPercentage > MIN_DISCOUNT_FOR_RENDER
-            ?
+          discountPercentage > MIN_DISCOUNT_FOR_RENDER &&
+            
             <span className="absolute top-0.5 left-0.5 bg-green-600 
           text-white text-xs px-2 py-1 rounded shadow opacity-85"
             >
               {`${Math.round(discountPercentage)}% Off!`}
             </span>
-            :
-            null
         }
       </div>
 
@@ -66,23 +61,7 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
       <div className="flex items-center gap-2 mt-1">
 
         <div className="flex flex-col">
-          {
-            (discountPercentage > MIN_DISCOUNT_FOR_RENDER)
-              ?
-              <div className="flex flex-1 gap-2 items-baseline">
-
-                <span className="text-gray-600 font-semibold line-through">
-                  {getFormattedPriceDisplay(price)}
-                </span>
-
-                <span className="text-2xl font-bold">
-                  {getFormattedPriceDisplay(finalPrice)}
-                </span>
-
-              </div>
-              :
-              <span className="text-2xl font-bold">{getFormattedPriceDisplay(price)}</span>
-          }
+          <PriceDisplay price={price} discountPercentage={discountPercentage} />
 
           {
             (stock > 0)
@@ -91,7 +70,6 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
               :
               <span className="text-xs text-red-600">Out of Stock</span>
           }
-
         </div>
 
         {/* Rating & total reviews */}

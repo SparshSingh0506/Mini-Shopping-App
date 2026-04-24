@@ -1,0 +1,26 @@
+import { getFormattedPriceDisplay } from '../../utils/formatPrice'
+
+export const MIN_DISCOUNT_FOR_RENDER = 5;
+
+export const PriceDisplay = ({ price, discountPercentage }: { price: number, discountPercentage: number }) => {
+  const hasValidDiscount = discountPercentage > MIN_DISCOUNT_FOR_RENDER;
+
+  if (!hasValidDiscount) return <span className="text-2xl font-bold">{getFormattedPriceDisplay(price)}</span>;
+
+  const finalPrice = price - (price * discountPercentage / 100);
+
+  return (
+    <div className="flex flex-1 gap-2 items-baseline">
+
+      <span className="text-gray-600 font-semibold line-through">
+        {getFormattedPriceDisplay(price)}
+      </span>
+
+      <span className="text-2xl font-bold">
+        {getFormattedPriceDisplay(finalPrice)}
+      </span>
+
+    </div>
+  )
+}
+
