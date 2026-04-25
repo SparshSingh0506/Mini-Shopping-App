@@ -5,7 +5,6 @@ import { useCartContext } from '../../contexts/CartContext';
 import { QuantityBox } from '../ui/QuantityBox';
 import { MIN_DISCOUNT_FOR_RENDER, PriceDisplay } from '../ui/PriceDisplay';
 
-
 export const HomeProductCard = ({ product }: { product: Product }) => {
   const { id, title, description, price, discountPercentage, rating, stock, reviews, thumbnail } = product;
   const { items, addToCart, clearItemFromCart } = useCartContext();

@@ -1,10 +1,13 @@
 import { getFormattedPriceDisplay } from '../../utils/formatPrice'
+
 import type { CartItem } from '../../contexts/CartContext';
-import { QuantityBox } from '../ui/QuantityBox.';
+
+import { QuantityBox } from '../ui/QuantityBox';
+import { PriceDisplay } from '../ui/PriceDisplay';
 
 export const CartProductCard = ({ item }: { item: CartItem }) => {
 
-  const { thumbnail, title, stock, description, shippingInformation, price } = item;
+  const { thumbnail, title, stock, description, shippingInformation, price, discountPercentage } = item;
 
   return (
     <div className="flex gap-6 border-b pb-4 mb-4 min-h-60">
@@ -62,7 +65,7 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
 
       {/* PRICE */}
       <div className="text-2xl font-semibold">
-        {getFormattedPriceDisplay(price)}
+        <PriceDisplay price={price} discountPercentage={discountPercentage} />
       </div>
     </div>
   );
