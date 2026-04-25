@@ -6,7 +6,7 @@ import { PriceDisplay } from '../ui/PriceDisplay';
 
 export const CartProductCard = ({ item }: { item: CartItem }) => {
 
-  const { id, thumbnail, title, stock, description, shippingInformation, price, discountPercentage } = item;
+  const { id, thumbnail, title, brand, stock, description, shippingInformation, price, discountPercentage } = item;
   const { clearItemFromCart } = useCartContext();
 
   return (
@@ -21,30 +21,37 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
       {/* DETAILS */}
       <div className="flex flex-col justify-between flex-1">
         <div>
-          <h3 className="text-3xl font-medium hover:cursor-pointer hover:underline">
-            {title}
-          </h3>
+          <div className="flex flex-col">
+            <h3 className="text-3xl font-medium hover:cursor-pointer hover:underline">
+              {title}
+            </h3>
+
+            <div className="flex text-xs">
+              <p className=" text-gray-700 mr-1">sold by: </p>
+              <p className="text-black font-semibold">{brand}</p>
+            </div>
+          </div>
 
           {
             stock > 0
-              ? <div className="flex gap-3 items-center">
-                <p className="text-green-600 text-sm">
+              ? <div className="flex gap-3 items-center text-xs">
+                <p className="text-green-600">
                   In Stock
                 </p>
 
                 <p>|</p>
 
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600">
                   {shippingInformation}
                 </p>
               </div>
               :
-              <p className="text-red-600 text-sm">
+              <p className="text-red-600 text-xs">
                 Out of Stock
               </p>
           }
 
-          <p className="text-black text-m mt-1">
+          <p className="text-black mt-1">
             {description}
           </p>
         </div>
