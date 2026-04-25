@@ -34,7 +34,7 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
 
                 <p>|</p>
 
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-600 text-sm">
                   {shippingInformation}
                 </p>
               </div>
@@ -64,8 +64,12 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
       </div>
 
       {/* PRICE */}
-      <div className="text-2xl font-semibold">
-        <PriceDisplay price={price} discountPercentage={discountPercentage} />
+      <div className="flex flex-col">
+        <div className="text-2xl font-semibold">
+          <PriceDisplay price={price} discountPercentage={discountPercentage} />
+        </div>
+
+        <p className="text-gray-800 self-end">per item</p>
       </div>
     </div>
   );
