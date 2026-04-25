@@ -1,13 +1,13 @@
-import { getFormattedPriceDisplay } from '../../utils/formatPrice'
-
 import type { CartItem } from '../../contexts/CartContext';
+import { useCartContext } from '../../contexts/CartContext';
 
 import { QuantityBox } from '../ui/QuantityBox';
 import { PriceDisplay } from '../ui/PriceDisplay';
 
 export const CartProductCard = ({ item }: { item: CartItem }) => {
 
-  const { thumbnail, title, stock, description, shippingInformation, price, discountPercentage } = item;
+  const { id, thumbnail, title, stock, description, shippingInformation, price, discountPercentage } = item;
+  const { clearItemFromCart } = useCartContext();
 
   return (
     <div className="flex gap-6 border-b pb-4 mb-4 min-h-60">
@@ -53,7 +53,8 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
         <div className="flex items-center gap-4 mt-3">
           <QuantityBox product={item} itemInCart={item} />
 
-          <button className="text-blue-600 text-sm hover:text-red-600 hover:underline hover:cursor-pointer">
+          <button className="text-blue-600 text-sm hover:text-red-600 hover:underline hover:cursor-pointer"
+          onClick={() => clearItemFromCart(id)}>
             Delete
           </button>
 
