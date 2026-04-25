@@ -34,7 +34,7 @@ export const Cart = () => {
               <div className="border mb-6" />
 
               <div className="flex flex-col gap-4">
-                {items.map(item => <CartProductCard item={item}/>)}
+                {items.map(item => <CartProductCard item={item} />)}
               </div>
 
             </div>
