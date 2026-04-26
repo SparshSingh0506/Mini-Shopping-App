@@ -1,6 +1,20 @@
-import type { CartItem } from '../contexts/CartContext';
+import { useCartContext } from '../contexts/CartContext';
 
-export const getOrderSummary = ({ items }: { items: CartItem[] }) => {
-  
+
+const { items } = useCartContext();
+
+export const getSubTotal = () => {
+
+  const finalPrice = items.reduce((acc, item) => {
+    const { price, discountPercentage, quantity } = item;
+
+    const totalPrice = price * quantity;
+    const discountedPrice = totalPrice - (totalPrice * discountPercentage / 100);
+
+    return discountedPrice + acc;
+  }, 0);
+
+  return finalPrice;
 }
+
 

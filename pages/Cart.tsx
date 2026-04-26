@@ -1,10 +1,17 @@
 import { NavLink } from 'react-router-dom';
 
 import { useCartContext } from '../contexts/CartContext'
+
 import { CartProductCard } from '../components/cards/CartProductCard'
+
+import { getSubTotal } from '../utils/orderSummary';
+import { getFormattedPriceDisplay } from '../utils/formatPrice';
+
+const DUMMY_TAX_AMOUNT = 1.5;
 
 export const Cart = () => {
   const { items } = useCartContext();
+  const subTotal = getSubTotal();
 
   return (
     <div className="min-h-screen p-4 md:px-40">
@@ -47,7 +54,7 @@ export const Cart = () => {
 
               <div className="flex justify-between mb-2 text-sm">
                 <span className="font-semibold">Subtotal</span>
-                <span>₹1998</span>
+                <span className="font-semibold">{getFormattedPriceDisplay(subTotal)}</span>
               </div>
 
               <div className="flex justify-between mb-2 text-sm">
@@ -57,14 +64,14 @@ export const Cart = () => {
 
               <div className="flex justify-between mb-4 text-sm">
                 <span className="font-semibold">Tax</span>
-                <span>₹100</span>
+                <span className="font-semibold">{getFormattedPriceDisplay(DUMMY_TAX_AMOUNT)}</span>
               </div>
 
               <div className='border my-2' />
 
               <div className="flex justify-between font-bold text-lg pt-2 mb-4">
                 <span>Total</span>
-                <span>₹2098</span>
+                <span>{getFormattedPriceDisplay(subTotal + DUMMY_TAX_AMOUNT)}</span>
               </div>
 
               <button className="w-full bg-yellow-400 hover:bg-yellow-500 py-2 rounded-md font-semibold transition">

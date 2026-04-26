@@ -6,7 +6,7 @@ import { QuantityBox } from '../ui/QuantityBox';
 import { MIN_DISCOUNT_FOR_RENDER, PriceDisplay } from '../ui/PriceDisplay';
 
 export const HomeProductCard = ({ product }: { product: Product }) => {
-  const { id, title, description, price, discountPercentage, rating, stock, reviews, thumbnail } = product;
+  const { id, title, description, price, discountPercentage, rating, availabilityStatus, reviews, thumbnail } = product;
   const { items, addToCart, clearItemFromCart } = useCartContext();
 
   const itemInCart = items.find(item => id === item.id);
@@ -29,12 +29,12 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
 
         {
           discountPercentage > MIN_DISCOUNT_FOR_RENDER &&
-            
-            <span className="absolute top-0.5 left-0.5 bg-green-600 
+
+          <span className="absolute top-0.5 left-0.5 bg-green-600 
           text-white text-xs px-2 py-1 rounded shadow opacity-85"
-            >
-              {`${Math.round(discountPercentage)}% Off!`}
-            </span>
+          >
+            {`${Math.round(discountPercentage)}% Off!`}
+          </span>
         }
       </div>
 
@@ -62,13 +62,12 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
         <div className="flex flex-col">
           <PriceDisplay price={price} discountPercentage={discountPercentage} />
 
-          {
-            (stock > 0)
-              ?
-              <span className="text-xs text-green-600">{`In Stock (${stock})`}</span>
-              :
-              <span className="text-xs text-red-600">Out of Stock</span>
-          }
+          <span className={`text-xs ${availabilityStatus === "In Stock"
+            ? "text-green-600"
+            : "text-red-600"}`}
+          >
+            {availabilityStatus}
+          </span>
         </div>
 
         {/* Rating & total reviews */}
