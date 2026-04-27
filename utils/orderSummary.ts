@@ -1,9 +1,7 @@
 import { useCartContext } from '../contexts/CartContext';
 
-
-const { items } = useCartContext();
-
 export const getSubTotal = () => {
+  const { items } = useCartContext();
 
   const finalPrice = items.reduce((acc, item) => {
     const { price, discountPercentage, quantity } = item;
