@@ -3,9 +3,6 @@
 
 # 📁 **🛒 Mini Shopping App**
 
-```md
-# 
-
 A mini e-commerce application built using React and TypeScript. The app allows users to browse products, add / remove items from cart, and view order summary in the cart page.gg
 
 ## 🚀 Features
