@@ -1,16 +1,14 @@
 import { NavLink } from "react-router-dom";
 
 import { useCartContext } from '../../contexts/CartContext'
+import { useState } from "react";
 
-type Props = {
-    handleSearch: (e: React.SubmitEvent<HTMLFormElement>) => void;
-};
-
-export const Navbar = ({ handleSearch }: Props) => {
+export const Navbar = ({ handleSearch }: { handleSearch: (query: string) => void }) => {
     const { items } = useCartContext();
+    const [searchQuery, setSearchQuery] = useState<string>("");
 
     return (
-        <nav className="bg-gray-900  w-full z-20 top-0 inset-s-0 border-b border-default">
+        <nav className="bg-gray-900 w-full z-20 top-0 inset-s-0 border-b border-default">
             <div className="max-w-screen-7xl flex flex-wrap items-center 
             justify-between mx-auto p-0.5 px-5">
 
@@ -26,19 +24,25 @@ export const Navbar = ({ handleSearch }: Props) => {
                 </NavLink>
 
                 {/* Search */}
-                <div>
-                    <form onSubmit={handleSearch} className="flex items-center gap-1">
-                        <input
-                            type="text"
-                            placeholder="Search items..."
-                            className="hidden md:block px-3 py-2 w-220 rounded bg-gray-100 text-black"
-                        />
 
-                        <button className="cursor-pointer p-2 text-white">
-                            <img src="../src/assets/search.svg" alt="search" className="w-10 h-10" />
-                        </button>
-                    </form>
-                </div>
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSearch(searchQuery);
+                }}
+                    className="flex items-center gap-1">
+
+                    <input
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        type="text"
+                        placeholder="Search items..."
+                        className="hidden md:block px-3 py-2 w-220 rounded bg-gray-100 text-black"
+                    />
+
+                    <button className="cursor-pointer p-2 text-white">
+                        <img src="../src/assets/search.svg" alt="search" className="w-10 h-10" />
+                    </button>
+                </form>
+
 
                 {/*Menu */}
                 <ul className="hidden md:flex gap-6 text-white font-semibold text-2xl hover:scale-105">
