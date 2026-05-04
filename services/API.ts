@@ -11,7 +11,7 @@ export const getProducts = async (): Promise<Product[]> => {
 
     if (!response.ok) throw new Error("Failed to get products");
 
-    const productData: ProductData  = await response.json();
+    const productData: ProductData = await response.json();
 
     return productData.products;
 }
