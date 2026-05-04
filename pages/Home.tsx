@@ -3,7 +3,7 @@ import { NavLink, useSearchParams } from 'react-router-dom'
 
 import type { Product } from "../interfaces/Product"
 
-import { getProducts } from '../services/API'
+import { getAllProducts } from '../services/productQueries'
 
 import { HomeProductCard } from '../components/cards/HomeProductCard'
 
@@ -21,19 +21,19 @@ export const Home = () => {
     );
 
     useEffect(() => {
-        const fetchProdcuts = async () => {
+        const fetchProducts = async () => {
             try {
-                const fetchedProducts: Product[] = await getProducts();
+                const fetchedProducts: Product[] = await getAllProducts();
                 setProducts(fetchedProducts);
             } catch (err) {
                 console.log(err);
-                setError("Failed to fetch products");
+                setError("Failed to load products");
             } finally {
                 setLoading(false);
             }
         }
 
-        fetchProdcuts();
+        fetchProducts();
     }, []);
 
     if (loading) return <h1 className="flex h-screen justify-center text-4xl mt-100">Loading...</h1>;
