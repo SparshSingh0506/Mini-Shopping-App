@@ -11,7 +11,6 @@ import { HomeProductCard } from '../components/cards/HomeProductCard'
 export const Home = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [error, setError] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(true);
 
     const [query] = useSearchParams();
     const search = query.get("search") || "";
@@ -25,18 +24,18 @@ export const Home = () => {
             try {
                 const fetchedProducts: Product[] = await getAllProducts();
                 setProducts(fetchedProducts);
-            } catch (err) {
+            } 
+            
+            catch (err) {
                 console.log(err);
                 setError("Failed to load products");
-            } finally {
-                setLoading(false);
-            }
+            } 
         }
 
         fetchProducts();
     }, []);
 
-    if (loading) return <h1 className="flex h-screen justify-center text-4xl mt-100">Loading...</h1>;
+    if (products.length === 0) return <h1 className="flex h-screen justify-center text-4xl mt-100">Loading...</h1>;
     if (error) return <h2 className="flex h-screen justify-center text-4xl mt-100">{error}</h2>;
 
     return (
