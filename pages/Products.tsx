@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom"
 
+import type { Product } from "../interfaces/Product";
+
 import { getProductById } from '../services/productQueries'
 
-import type { Product } from "../interfaces/Product";
+import { PriceDisplay } from "../components/ui/PriceDisplay";
 
 
 export const Products = () => {
@@ -32,7 +34,7 @@ export const Products = () => {
     if (!product) return <h1 className="flex h-screen justify-center text-4xl mt-100">Loading...</h1>; // this handles final return where product exists, so no .? for every property
     if (error) return <h2 className="flex h-screen justify-center text-4xl mt-100">{error}</h2>;
 
-    const {images, title, tags} = product;
+    const {images, title, tags, price, discountPercentage} = product;
 
     return (
         <div className="min-h-screen p-3 flex justify-center">
@@ -67,17 +69,30 @@ export const Products = () => {
                 <div className="flex flex-col gap-5">
 
                     <div>
-                        <h1 className="text-4xl font-bold text-gray-800">
+                        <h1 className="text-5xl font-bold text-gray-800">
                             {title}
                         </h1>
                         
-                        <div className="mt-2 flex gap-2">
+                        <div className="mt-3 flex gap-1">
                             {tags?.map(tag => (
-                                <span className="bg-blue-100 text-blue-700 rounded-lg p-0.5">
+                                <span className="bg-blue-100 text-blue-700 px-2 rounded-lg p-0.5">
                                     {tag.charAt(0).toUpperCase() + tag?.slice(1)}
                                 </span>
                             ))}
                         </div>
+                    </div>
+
+
+                    {/* Price */}
+                    <div className="flex items-end gap-4">
+                        
+                        <div className="">
+                            <PriceDisplay price={price} discountPercentage={discountPercentage} />
+                        </div>
+
+                        <span className="text-green-600 font-bold text-xl">
+                            12% OFF
+                        </span>
                     </div>
 
                     {/* Ratings */}
@@ -88,21 +103,6 @@ export const Products = () => {
 
                         <span className="text-gray-600">
                             12,430 Ratings & 1,204 Reviews
-                        </span>
-                    </div>
-
-                    {/* Price */}
-                    <div className="flex items-end gap-4">
-                        <h2 className="text-5xl font-bold text-gray-900">
-                            ₹1,39,999
-                        </h2>
-
-                        <span className="text-2xl text-gray-400 line-through">
-                            ₹1,59,999
-                        </span>
-
-                        <span className="text-green-600 font-bold text-xl">
-                            12% OFF
                         </span>
                     </div>
 
