@@ -34,7 +34,8 @@ export const Products = () => {
     if (!product) return <h1 className="flex h-screen justify-center text-4xl mt-100">Loading...</h1>; // this handles final return where product exists, so no .? for every property
     if (error) return <h2 className="flex h-screen justify-center text-4xl mt-100">{error}</h2>;
 
-    const {images, title, tags, price, discountPercentage} = product;
+    const { images, title, tags, price, discountPercentage, rating, reviews, description } = product;
+    const {brand, dimensions, weight} = product;
 
     return (
         <div className="min-h-screen p-3 flex justify-center">
@@ -72,7 +73,11 @@ export const Products = () => {
                         <h1 className="text-5xl font-bold text-gray-800">
                             {title}
                         </h1>
-                        
+
+                        <p>
+                            sold by: {brand}
+                        </p>
+
                         <div className="mt-3 flex gap-1">
                             {tags?.map(tag => (
                                 <span className="bg-blue-100 text-blue-700 px-2 rounded-lg p-0.5">
@@ -85,7 +90,7 @@ export const Products = () => {
 
                     {/* Price */}
                     <div className="flex items-end gap-4">
-                        
+
                         <div className="">
                             <PriceDisplay price={price} discountPercentage={discountPercentage} />
                         </div>
@@ -98,49 +103,33 @@ export const Products = () => {
                     {/* Ratings */}
                     <div className="flex items-center gap-3">
                         <div className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-semibold">
-                            4.8 ★
+                            {rating.toFixed(1)} ★
                         </div>
 
                         <span className="text-gray-600">
-                            12,430 Ratings & 1,204 Reviews
+                            {reviews?.length ?? 0} Reviews
                         </span>
                     </div>
 
-                    {/* Offers */}
-                    <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
-                        <h3 className="font-semibold text-lg mb-2">
-                            Available Offers
-                        </h3>
-
-                        <ul className="space-y-2 text-gray-700">
-                            <li>🔥 Bank Offer: 10% Instant Discount</li>
-                            <li>🚚 Free Delivery by Tomorrow</li>
-                            <li>💳 EMI starting from ₹5,499/month</li>
-                        </ul>
+                    <hr />
+                    
+                    {/* Description */}
+                    <div>
+                        {description}
                     </div>
 
-                    {/* Features */}
+                    <hr />
+
+                    {/* About */}
                     <div>
-                        <h3 className="text-2xl font-semibold mb-3">
-                            Highlights
+                        <h3 className="text-2xl underline font-semibold mb-3">
+                            Details
                         </h3>
 
                         <div className="grid grid-cols-2 gap-3">
-                            {[
-                                "256 GB Storage",
-                                "48MP Camera",
-                                "6.7-inch OLED Display",
-                                "A17 Pro Processor",
-                                "Titanium Body",
-                                "5G Support"
-                            ].map((feature) => (
-                                <div
-                                    key={feature}
-                                    className="bg-gray-100 rounded-xl px-4 py-3 text-gray-700 font-medium"
-                                >
-                                    {feature}
-                                </div>
-                            ))}
+                            <ul className="list-disc list-inside pl-5">
+                                <li></li>
+                            </ul>
                         </div>
                     </div>
 
