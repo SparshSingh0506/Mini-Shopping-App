@@ -35,10 +35,10 @@ export const Products = () => {
     if (error) return <h2 className="flex h-screen justify-center text-4xl mt-100">{error}</h2>;
 
     const { images, title, tags, price, discountPercentage, rating, reviews, description } = product;
-    const {brand, dimensions, weight} = product;
+    const { brand, dimensions, weight, warrantyInformation } = product;
 
     return (
-        <div className="min-h-screen p-3 flex justify-center">
+        <div className="min-h-screen p-1 flex justify-center">
             <div className="w-full max-w-8xl bg-white rounded-2xl shadow-lg p-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
 
                 {/* Left Side - Product Images */}
@@ -74,11 +74,9 @@ export const Products = () => {
                             {title}
                         </h1>
 
-                        <p>
-                            sold by: {brand}
-                        </p>
+                        {brand && <p><span className="font-semibold">Sold by:</span> {brand}</p>}
 
-                        <div className="mt-3 flex gap-1">
+                        <div className="mt-2 flex gap-1">
                             {tags?.map(tag => (
                                 <span className="bg-blue-100 text-blue-700 px-2 rounded-lg p-0.5">
                                     {tag.charAt(0).toUpperCase() + tag?.slice(1)}
@@ -90,7 +88,6 @@ export const Products = () => {
 
                     {/* Price */}
                     <div className="flex items-end gap-4">
-
                         <div className="">
                             <PriceDisplay price={price} discountPercentage={discountPercentage} />
                         </div>
@@ -112,7 +109,7 @@ export const Products = () => {
                     </div>
 
                     <hr />
-                    
+
                     {/* Description */}
                     <div>
                         {description}
@@ -128,19 +125,26 @@ export const Products = () => {
 
                         <div className="grid grid-cols-2 gap-3">
                             <ul className="list-disc list-inside pl-5">
-                                <li></li>
+                                {brand && <li><span className="font-semibold">Brand:</span> {brand}</li>}
+                                {dimensions && <li> <span className="font-semibold">Dimensions:</span>
+                                    <ul className="list-[square] list-inside pl-5">
+                                        <li><span className="font-semibold">Width:</span> {dimensions.width}</li>
+                                        <li><span className="font-semibold">Height:</span> {dimensions.height}</li>
+                                        <li><span className="font-semibold">depth:</span> {dimensions.depth}</li>
+                                    </ul>
+                                </li>}
+
+                                {weight && <li><span className="font-semibold">Weight:</span> {weight}</li>}
+
+                                {warrantyInformation && <li><span className="font-semibold">Warranty Information:</span> <span>{warrantyInformation}</span></li>}
                             </ul>
                         </div>
                     </div>
 
                     {/* Buttons */}
                     <div className="flex gap-4 mt-4">
-                        <button className="flex-1 bg-yellow-400 hover:bg-yellow-500 transition-all py-4 rounded-xl text-lg font-bold">
+                        <button className="flex-1 bg-blue-600 hover:bg-blue-700 hover:cursor-pointer transition-all py-4 rounded-xl text-lg text-white font-bold">
                             Add to Cart
-                        </button>
-
-                        <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white transition-all py-4 rounded-xl text-lg font-bold">
-                            Buy Now
                         </button>
                     </div>
 
