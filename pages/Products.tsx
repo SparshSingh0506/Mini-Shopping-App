@@ -7,7 +7,7 @@ import type { Product } from "../interfaces/Product";
 import { getProductById } from '../services/productQueries'
 
 import { PriceDisplay } from "../components/ui/PriceDisplay";
-
+import { MIN_DISCOUNT_FOR_RENDER } from '../components/ui/PriceDisplay'
 
 export const Products = () => {
     const { id } = useParams(); // read from the url /products/:id
@@ -67,14 +67,14 @@ export const Products = () => {
                 </div>
 
                 {/* Right Side - Product Info */}
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-4">
 
                     <div>
                         <h1 className="text-5xl font-bold text-gray-800">
                             {title}
                         </h1>
 
-                        {brand && <p><span className="font-semibold">Sold by:</span> {brand}</p>}
+                        {brand && <p className="mt-2"><span className="font-semibold">Sold by:</span> {brand}</p>}
 
                         <div className="mt-2 flex gap-1">
                             {tags?.map(tag => (
@@ -83,29 +83,28 @@ export const Products = () => {
                                 </span>
                             ))}
                         </div>
-                    </div>
+                        
+                        {/* Price */}
+                        <div className="flex items-center gap-4">
+                            <div className="text-2xl">
+                                <PriceDisplay price={price} discountPercentage={discountPercentage} />
+                            </div>
 
-
-                    {/* Price */}
-                    <div className="flex items-end gap-4">
-                        <div className="">
-                            <PriceDisplay price={price} discountPercentage={discountPercentage} />
+                            <span className="text-green-600 font-bold text-xl">
+                                {discountPercentage > MIN_DISCOUNT_FOR_RENDER && <span>{Math.round(discountPercentage)}% OFF</span>}
+                            </span>
                         </div>
 
-                        <span className="text-green-600 font-bold text-xl">
-                            12% OFF
-                        </span>
-                    </div>
+                        {/* Ratings */}
+                        <div className="flex items-center gap-3 mt-2">
+                            <div className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-semibold">
+                                {rating.toFixed(1)} ★
+                            </div>
 
-                    {/* Ratings */}
-                    <div className="flex items-center gap-3">
-                        <div className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm font-semibold">
-                            {rating.toFixed(1)} ★
+                            <span className="text-gray-600">
+                                {reviews?.length ?? 0} Reviews
+                            </span>
                         </div>
-
-                        <span className="text-gray-600">
-                            {reviews?.length ?? 0} Reviews
-                        </span>
                     </div>
 
                     <hr />
@@ -141,22 +140,13 @@ export const Products = () => {
                         </div>
                     </div>
 
+                    <hr />
+
                     {/* Buttons */}
-                    <div className="flex gap-4 mt-4">
+                    <div className="flex gap-4">
                         <button className="flex-1 bg-blue-600 hover:bg-blue-700 hover:cursor-pointer transition-all py-4 rounded-xl text-lg text-white font-bold">
                             Add to Cart
                         </button>
-                    </div>
-
-                    {/* Delivery */}
-                    <div className="border-t pt-4 text-gray-600">
-                        <p>
-                            📍 Deliver to: Dadri, Uttar Pradesh
-                        </p>
-
-                        <p className="mt-2">
-                            ✅ In Stock
-                        </p>
                     </div>
                 </div>
             </div>

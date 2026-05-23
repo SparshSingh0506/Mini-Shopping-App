@@ -58,7 +58,10 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
         <div className="flex items-center gap-2 mt-1">
 
           <div className="flex flex-col">
+            <div className="text-sm">
+
             <PriceDisplay price={price} discountPercentage={discountPercentage} />
+            </div>
 
             <AvailabilityStatus availabilityStatus={availabilityStatus} />
           </div>
