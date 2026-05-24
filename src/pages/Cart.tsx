@@ -74,7 +74,7 @@ export const Cart = () => {
                 <span>{getFormattedPriceDisplay(subTotal + DUMMY_TAX_AMOUNT)}</span>
               </div>
 
-              <button className="w-full bg-yellow-400 hover:bg-yellow-500 py-2 rounded-md font-semibold transition">
+              <button className="w-full bg-yellow-400 hover:bg-yellow-500 py-2 rounded-md font-semibold transition hover:cursor-pointer">
                 Proceed to Checkout
               </button>
             </div>

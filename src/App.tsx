@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 
-import { Home } from "../pages/Home"
-import { Cart } from "../pages/Cart"
-import { Products } from "../pages/Products"
+import { Home } from "./pages/Home"
+import { Cart } from "./pages/Cart"
+import { Products } from "./pages/Products"
 
-import { Navbar } from "../components/layout/Navbar"
+import { Navbar } from "./components/layout/Navbar"
 
 function App() {
   const navigateTo = useNavigate();
