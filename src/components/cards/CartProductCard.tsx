@@ -5,6 +5,7 @@ import { QuantityBox } from '../ui/QuantityBox';
 import { PriceDisplay } from '../ui/PriceDisplay';
 import { DiscountOverlay } from '../ui/DiscountOverlay';
 import { AvailabilityStatus } from '../ui/AvailabilityStatus';
+import { NavLink } from 'react-router-dom';
 
 export const CartProductCard = ({ item }: { item: CartItem }) => {
 
@@ -30,10 +31,12 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
       <div className="flex flex-col justify-between flex-1">
         <div>
           <div className="flex flex-col">
-            <h3 className="text-3xl font-medium 
-            hover:cursor-pointer hover:underline">
-              {title}
-            </h3>
+            <NavLink to={`/products/${id}`}>
+              <h3 className="text-3xl font-medium 
+              hover:cursor-pointer hover:underline">
+                {title}
+              </h3>
+            </NavLink>
 
             {brand &&
               <div className="flex text-xs">
