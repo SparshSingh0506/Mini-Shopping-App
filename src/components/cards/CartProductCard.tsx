@@ -14,18 +14,20 @@ export const CartProductCard = ({ item }: { item: CartItem }) => {
 
   return (
     <div className="flex gap-6 border-b pb-4 mb-4 min-h-60">
-      <div className="relative">
-        {/* IMAGE */}
-        <img
-          src={thumbnail}
-          alt="product"
-          className="w-full md:w-50 h-50 object-cover 
+      <NavLink to={`/products/${id}`}>
+        <div className="relative">
+          {/* IMAGE */}
+          <img
+            src={thumbnail}
+            alt="product"
+            className="w-full md:w-50 h-50 object-cover 
           rounded hover:cursor-pointer"
-        />
+          />
 
-        {/* Discount Overlay */}
-        <DiscountOverlay discountPercentage={discountPercentage} />
-      </div>
+          {/* Discount Overlay */}
+          <DiscountOverlay discountPercentage={discountPercentage} />
+        </div>
+      </NavLink>
 
       {/* DETAILS */}
       <div className="flex flex-col justify-between flex-1">
