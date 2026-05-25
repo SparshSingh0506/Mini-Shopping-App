@@ -14,28 +14,35 @@ export const Products = () => {
 
     const [product, setProduct] = useState<Product | null>(null);
     const [error, setError] = useState<string>("");
-
+    
     useEffect(() => {
         const fetchProductById = async () => {
             try {
                 const fetchedProduct: Product = await getProductById(Number(id));
                 setProduct(fetchedProduct);
             }
-
+            
             catch (err) {
                 console.log(err);
                 setError("Failed to load product");
             }
         }
-
+        
         fetchProductById();
     }, []);
+
+    // set initial product image
+    const [productImage, setProductImage] = useState<string>("");
+
+    useEffect(() => {
+        if (product?.images?.length) setProductImage(product.images[0])
+    }, [product]);
+
 
     if (!product) return <h1 className="flex h-screen justify-center text-4xl mt-100">Loading...</h1>; // this handles final return where product exists, so no .? for every property
     if (error) return <h2 className="flex h-screen justify-center text-4xl mt-100">{error}</h2>;
 
-    const { images, title, tags, price, discountPercentage, rating, reviews, description } = product;
-    const { brand, dimensions, weight, warrantyInformation } = product;
+    const { images, title, tags, price, discountPercentage, rating, reviews, description, brand, dimensions, weight, warrantyInformation } = product;
 
     return (
         <div className="min-h-screen p-1 flex justify-center">
@@ -45,16 +52,18 @@ export const Products = () => {
                 <div className="flex flex-col gap-4">
                     <div className="bg-gray-200 rounded-2xl overflow-hidden h-125 flex items-center justify-center">
                         <img
-                            src={images[0]}
+                            src={productImage}
                             alt="product"
                             className="h-full object-cover"
                         />
                     </div>
 
                     <div className="flex gap-3">
-                        {images.map((image) => (
+                        {images.map((image, i) => (
                             <div className="w-24 h-24 bg-gray-200 rounded-xl overflow-hidden border 
                                 hover:border-orange-500 cursor-pointer"
+                                key={i}
+                                onClick={() => setProductImage(image)}
                             >
                                 <img
                                     src={image}
@@ -77,13 +86,13 @@ export const Products = () => {
                         {brand && <p className="mt-2"><span className="font-semibold">Sold by:</span> {brand}</p>}
 
                         <div className="mt-2 flex gap-1">
-                            {tags?.map(tag => (
-                                <span className="bg-blue-100 text-blue-700 px-2 rounded-lg p-0.5">
+                            {tags?.map((tag, i) => (
+                                <span className="bg-blue-100 text-blue-700 px-2 rounded-lg p-0.5" key={i}>
                                     {tag.charAt(0).toUpperCase() + tag?.slice(1)}
                                 </span>
                             ))}
                         </div>
-                        
+
                         {/* Price */}
                         <div className="flex items-center gap-4">
                             <div className="text-2xl">
