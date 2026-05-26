@@ -13,26 +13,26 @@ export const Products = () => {
     const { id } = useParams(); // read from the url /products/:id
 
     const [product, setProduct] = useState<Product | null>(null);
-    const [error, setError] = useState<string>("");
-    
+    const [error, setError] = useState<string | null>(null);
+
     useEffect(() => {
         const fetchProductById = async () => {
             try {
                 const fetchedProduct: Product = await getProductById(Number(id));
                 setProduct(fetchedProduct);
             }
-            
+
             catch (err) {
                 console.log(err);
                 setError("Failed to load product");
             }
         }
-        
+
         fetchProductById();
     }, []);
 
     // set initial product image
-    const [productImage, setProductImage] = useState<string>("");
+    const [productImage, setProductImage] = useState<string | null>(null);
 
     useEffect(() => {
         if (product?.images?.length) setProductImage(product.images[0])
@@ -52,7 +52,7 @@ export const Products = () => {
                 <div className="flex flex-col gap-4">
                     <div className="bg-gray-200 rounded-2xl overflow-hidden h-125 flex items-center justify-center">
                         <img
-                            src={productImage}
+                            src={productImage ?? ""}
                             alt="product"
                             className="h-full object-cover"
                         />
@@ -158,7 +158,14 @@ export const Products = () => {
                         </button>
                     </div>
                 </div>
+
+                <div>
+                    <h1>
+                        Reviews
+                    </h1>
+                </div>
             </div>
+
         </div>
     );
 }
