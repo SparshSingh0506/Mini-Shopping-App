@@ -1,3 +1,5 @@
+import blankUserIcon from "../../assets/user.svg"
+
 interface reviewType {
   rating: number,
   comment: string,
@@ -41,7 +43,7 @@ export const CommentBox = ({ review }: { review: reviewType }) => {
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="flex gap-2">
-            <img src="../src/assets/user.svg" className="size-7" alt="user" />
+            <img src={blankUserIcon} className="size-7" alt="user" />
 
             <h3 className="text-lg font-semibold text-zinc-900">
               {reviewerName}

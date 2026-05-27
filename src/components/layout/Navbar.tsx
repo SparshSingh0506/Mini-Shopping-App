@@ -1,7 +1,11 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 import { useCartContext } from '../../contexts/CartContext'
-import { useState } from "react";
+
+import shoppingBagIcon from "../../assets/shopping-bag.svg"
+import searchIcon from "../../assets/search.svg"
+import cartIcon from "../../assets/shopping-cart.svg"
 
 export const Navbar = ({ handleSearch }: { handleSearch: (query: string) => void }) => {
     const { items } = useCartContext();
@@ -13,9 +17,9 @@ export const Navbar = ({ handleSearch }: { handleSearch: (query: string) => void
             justify-between mx-auto p-0.5 px-5">
 
                 {/*Brand Logo*/}
-                <NavLink to="/" className="flex items-center space-x-3">
+                <NavLink to="/" className="flex items-center space-x-3 hover:scale-103">
                     <img
-                        src="../src/assets/shopping-bag.svg"
+                        src={shoppingBagIcon}
                         className="h-7"
                         alt="Logo"
                     />
@@ -39,20 +43,24 @@ export const Navbar = ({ handleSearch }: { handleSearch: (query: string) => void
                     />
 
                     <button className="cursor-pointer p-2 text-white">
-                        <img src="../src/assets/search.svg" alt="search" className="w-10 h-10" />
+                        <img 
+                        src={searchIcon}
+                        alt="search" 
+                        className="w-10 h-10" 
+                        />
                     </button>
                 </form>
 
 
                 {/*Menu */}
-                <ul className="hidden md:flex gap-6 text-white font-semibold text-2xl hover:scale-105">
+                <ul className="hidden md:flex gap-6 text-white font-semibold text-2xl hover:scale-103">
                     <li>
                         <NavLink to='/cart' className="flex items-center space-x-3">
                             <span className="text-xl text-white font-semibold">Cart</span>
 
                             <div className="relative">
                                 <img
-                                    src="../src/assets/shopping-cart.svg"
+                                    src={cartIcon}
                                     alt="cart"
                                     className="w-10 h-10"
                                 />
