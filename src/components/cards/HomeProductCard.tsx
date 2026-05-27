@@ -60,7 +60,7 @@ export const HomeProductCard = ({ product }: { product: Product }) => {
           <div className="flex flex-col">
             <div className="text-sm">
 
-            <PriceDisplay price={price} discountPercentage={discountPercentage} />
+              <PriceDisplay price={price} discountPercentage={discountPercentage} />
             </div>
 
             <AvailabilityStatus availabilityStatus={availabilityStatus} />

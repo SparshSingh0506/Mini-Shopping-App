@@ -7,10 +7,10 @@ export interface CartItem extends Product {
 }
 
 interface CartContextType { // this is the data context provider will be globally allow access to for all components
-    items: CartItem[]
-    addToCart: (product: Product) => void
-    removeFromCart: (productID: number) => void
-    clearItemFromCart: (productID: number) => void
+    items: CartItem[],
+    addToCart: (product: Product) => void,
+    removeFromCart: (productID: number) => void,
+    clearItemFromCart: (productID: number) => void,
     clearCart: () => void
 }
 

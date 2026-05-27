@@ -7,7 +7,6 @@ export const QuantityBox = ({ product, itemInCart }: { product: Product, itemInC
   const { addToCart, removeFromCart } = useCartContext();
 
   return (
-
     <div className="flex items-center border-2 border-gray-800 
       rounded-lg overflow-hidden bg-gray-50">
 

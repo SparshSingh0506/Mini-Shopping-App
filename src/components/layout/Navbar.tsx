@@ -15,7 +15,7 @@ export const Navbar = ({ handleSearch }: { handleSearch: (query: string) => void
                 {/*Brand Logo*/}
                 <NavLink to="/" className="flex items-center space-x-3">
                     <img
-                        src="../src/assets/react.svg"
+                        src="../src/assets/shopping-bag.svg"
                         className="h-7"
                         alt="Logo"
                     />

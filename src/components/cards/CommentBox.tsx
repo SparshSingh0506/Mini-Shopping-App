@@ -9,7 +9,7 @@ interface reviewType {
 const getRatingBoxColor = (rating: number): string => {
   switch (rating) {
     case 5:
-      return "bg-green-400";
+      return "bg-green-300";
     case 4:
       return "bg-green-200";
     case 3:
@@ -17,7 +17,7 @@ const getRatingBoxColor = (rating: number): string => {
     case 2:
       return "bg-red-200";
     case 1:
-      return "bg-red-400";
+      return "bg-red-300";
   }
 
   return "bg-gray-100"
